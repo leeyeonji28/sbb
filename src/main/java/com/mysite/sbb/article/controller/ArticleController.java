@@ -26,7 +26,29 @@ public class ArticleController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<Article> showArticleList() {
+    public List<Article> showArticleList(String title, String body) {
+        if(title != null && body == null) {
+            if(articleRepository.existsByTitle(title) == false) {
+                System.out.println("제목과 일치하는 게시물이 없습니다.");
+                return null;
+            }
+            return articleRepository.findByTitle(title);
+
+        } else if(title == null && body != null) {
+            if(articleRepository.existsByBody(body) == false) {
+                System.out.println("내용과 일치하는 게시물이 없습니다.");
+                return null;
+            }
+            return articleRepository.findByBody(body);
+
+        } else if(title != null && body != null) {
+            if(articleRepository.existsByTitleAndBody(title, body) == false) {
+                System.out.println("제목, 내용과 일치하는 게시물이 없습니다.");
+                return null;
+            }
+            return articleRepository.findByTitleAndBody(title, body);
+        }
+
         return articleRepository.findAll();
     }
 
