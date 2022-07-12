@@ -48,6 +48,8 @@ public class ArticleController {
             article.setBody(body); //불러온 데이터 수정
         }
 
+
+
         articleRepository.save(article); //수정된 데이터 db에 저장
 
         return article;
@@ -56,8 +58,13 @@ public class ArticleController {
     @RequestMapping("/doDelete")
     @ResponseBody
     public String doDelete(long id) {
+        if(articleRepository.existsById(id) == false){
+            return "%d번 게시물은 이미 삭제되었거나 존재하지 않는 게시물 입니다.".formatted(id);
+        }
+
         articleRepository.deleteById(id); // 삭제
         return "%d번 게시물이 삭제되었습니다".formatted(id);
+
 
     }
 
