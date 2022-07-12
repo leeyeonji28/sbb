@@ -69,5 +69,13 @@ public class ArticleController {
 
     }
 
+    @RequestMapping("/findByTitle")
+    @ResponseBody
+    public List<Article> findByTitle(String title) {
+        List<Article> articles = articleRepository.findByTitle(title);
+        return articles;
+
+
+    }
 
 }
