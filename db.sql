@@ -94,3 +94,11 @@ INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 3',
 content = '질문내용 3';
+
+
+
+ALTER TABLE question ADD COLUMN view_count INT NOT NULL;
+SELECT * FROM question;
+
+ALTER TABLE answer ADD COLUMN reply_like BOOLEAN NOT NULL;
+SELECT * FROM answer;

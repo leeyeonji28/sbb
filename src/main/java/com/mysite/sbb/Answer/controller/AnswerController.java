@@ -26,4 +26,11 @@ public class AnswerController {
         this.answerService.create(question, content);
         return String.format("redirect:/question/detail/%s", id); // 모든 작업이 끝나면 이 주소로 돌아오겠다는 뜻
     }
+
+    @PostMapping("/like/{questionId}/{answerId}")
+    public String createAnswer(@PathVariable("questionId") Integer questionId, @PathVariable("answerId") Integer answerId) {
+        this.answerService.setLike(answerId);
+
+        return String.format("redirect:/question/detail/%s", questionId);
+    }
 }
